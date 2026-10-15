@@ -1,0 +1,9 @@
+{
+  "entries": [
+    { "data": "2026-03-31", "tip": "trade", "suma": 653,  "moneda": "USD", "curs": 4.341501, "nota": "Apex" },
+    { "data": "2026-04-30", "tip": "trade", "suma": 503,  "moneda": "USD", "curs": 4.330020, "nota": "Apex" },
+    { "data": "2026-05-31", "tip": "trade", "suma": 1261, "moneda": "USD", "curs": 4.474941, "nota": "Apex" },
+    { "data": "2026-06-30", "tip": "trade", "suma": 505,  "moneda": "USD", "curs": 4.534653, "nota": "Apex" },
+    { "data": "2026-09-15", "tip": "div",   "suma": 10000, "moneda": "RON", "curs": 1, "nota": "Dividende" }
+  ]
+}
