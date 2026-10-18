@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Venituri extra</title>
+<style>
+:root{color-scheme:light dark;--bg:#f2f2f7;--card:#fff;--text:#1c1c1e;--sub:#8e8e93;--line:rgba(60,60,67,.14);--fill:rgba(120,120,128,.12);--blue:#007aff;--green:#34c759;--orange:#ff9500;--red:#ff3b30;--purple:#af52de;--teal:#32ade6;--pink:#ff2d55;--gray:#8e8e93;--r:18px}
+@media(prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--text:#fff;--sub:#98989f;--line:rgba(84,84,88,.55);--fill:rgba(120,120,128,.24);--blue:#0a84ff;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--purple:#bf5af2;--teal:#64d2ff;--pink:#ff375f;--gray:#98989f}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+button,input,select{font:inherit;color:inherit}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 10px;background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
+h1{font-size:28px;margin:0;font-weight:700;letter-spacing:-.4px}
+.ysel{appearance:none;-webkit-appearance:none;border:0;background:var(--fill);border-radius:999px;padding:7px 28px 7px 14px;font-weight:600;color:var(--blue);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238e8e93' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center}
+.hr{display:flex;align-items:center;gap:8px}
+.cur{display:flex;background:var(--fill);border-radius:999px;padding:2px}
+.cur button{border:0;background:transparent;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700;color:var(--sub);cursor:pointer}
+.cur button.on{background:var(--card);color:var(--blue);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+main{max-width:720px;margin:0 auto;padding:4px 16px 24px}
+.card{background:var(--card);border-radius:var(--r);padding:16px;margin:0 0 14px}
+.card h3{margin:0 0 10px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--sub)}
+.sub{color:var(--sub);font-size:13px}
+.hero{padding:20px 18px}
+.big{font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.05;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.3px}
+.chip.ok{background:color-mix(in srgb,var(--green) 18%,transparent);color:var(--green)}
+.chip.warn{background:color-mix(in srgb,var(--orange) 20%,transparent);color:var(--orange)}
+.chip.cass{background:color-mix(in srgb,var(--blue) 16%,transparent);color:var(--blue)}
+.chip.max{background:color-mix(in srgb,var(--red) 16%,transparent);color:var(--red)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:var(--r);padding:14px 16px}
+.stat b{display:block;font-size:22px;font-weight:700;letter-spacing:-.4px;font-variant-numeric:tabular-nums;margin-top:2px}
+.stat span{font-size:12px;color:var(--sub);font-weight:500}
+.bar{position:relative;height:10px;border-radius:99px;background:var(--fill);margin:26px 0 22px}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--blue),#5ac8fa)}
+.bar u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--sub);opacity:.55;text-decoration:none}
+.bar em{position:absolute;top:-20px;transform:translateX(-50%);font-size:11px;font-style:normal;color:var(--sub);font-weight:600;white-space:nowrap}
+.bar small{position:absolute;top:16px;transform:translateX(-50%);font-size:11px;color:var(--sub);white-space:nowrap}
+.seg{display:flex;background:var(--fill);border-radius:10px;padding:2px;gap:2px}
+.seg button{flex:1;border:0;background:transparent;padding:7px 8px;border-radius:8px;font-weight:600;font-size:14px;color:var(--text);cursor:pointer}
+.seg button.on{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.lrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:.5px solid var(--line)}
+.lrow:first-of-type{border-top:0}
+.lrow label{flex:1}
+.lrow input{width:120px;text-align:right;border:0;background:var(--fill);border-radius:10px;padding:8px 10px;outline:none}
+.lrow input:focus{box-shadow:0 0 0 2px var(--blue)}
+.inp{width:100%;border:0;background:var(--fill);border-radius:12px;padding:12px 14px;outline:none}
+.inp:focus{box-shadow:0 0 0 2px var(--blue)}
+.btn{border:0;border-radius:12px;padding:12px 16px;font-weight:600;background:var(--blue);color:#fff;cursor:pointer;width:100%}
+.btn.sec{background:var(--fill);color:var(--blue)}
+.btn.del{background:color-mix(in srgb,var(--red) 14%,transparent);color:var(--red)}
+.btns{display:flex;gap:10px;margin-top:10px}
+.btns .btn{flex:1}
+.mh{display:flex;justify-content:space-between;align-items:baseline;margin:18px 4px 6px;font-size:13px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.4px}
+.list{background:var(--card);border-radius:var(--r);overflow:hidden}
+.ent{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:.5px solid var(--line);cursor:pointer}
+.ent:first-child{border-top:0}
+.ent:active{background:var(--fill)}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.ent .m{flex:1;min-width:0}
+.ent .m div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ent .r{text-align:right;font-variant-numeric:tabular-nums}
+.neg{color:var(--red)}
+.empty{padding:28px 16px;text-align:center;color:var(--sub)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--sub);font-weight:600;text-align:right;padding:6px 8px;white-space:nowrap}
+td{padding:9px 8px;text-align:right;border-top:.5px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--card);font-weight:600}
+td.z{color:var(--sub);opacity:.55}
+tr.tot td{font-weight:700;border-top:1.5px solid var(--text)}
+tr.eur td{color:var(--sub);font-size:12px;font-weight:500}
+td.y{background:color-mix(in srgb,#ffd60a 38%,transparent)}
+td.o{background:color-mix(in srgb,var(--orange) 38%,transparent)}
+.cell{width:86px;text-align:right;border:0;background:var(--fill);border-radius:8px;padding:7px 8px;outline:none;font-variant-numeric:tabular-nums}
+.cell:focus{box-shadow:0 0 0 2px var(--blue)}
+.fab{position:fixed;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:30px;line-height:1;box-shadow:0 6px 18px rgba(0,122,255,.4);cursor:pointer;z-index:6}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:7;display:flex;justify-content:space-around;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:.5px solid var(--line)}
+.tabs button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--sub);padding:4px 0;cursor:pointer}
+.tabs button.on{color:var(--blue)}
+.tabs svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:20;display:none}
+.scrim.show{display:block}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:560px;margin:0 auto;background:var(--bg);border-radius:22px 22px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.sheet.show{transform:none}
+.sheet h2{margin:2px 0 12px;font-size:20px}
+.fld{margin-bottom:12px}
+.fld>span{display:block;font-size:12px;font-weight:600;color:var(--sub);margin:0 4px 5px;text-transform:uppercase;letter-spacing:.3px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:rgba(40,40,45,.94);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%)}
+.note{font-size:12px;color:var(--sub);padding:0 6px 10px;line-height:1.45}
+svg.ch{width:100%;height:auto;display:block}
+
+.seg.wrap{flex-wrap:wrap}
+.seg.wrap button{flex:1 1 auto}
+.crow{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:.5px solid var(--line);flex-wrap:wrap}
+.crow:first-child{border-top:0}
+.cdot{width:26px;height:26px;border-radius:50%;border:0;padding:0;cursor:pointer;flex:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.cname{flex:1;min-width:120px;border:0;background:var(--fill);border-radius:10px;padding:8px 10px;outline:none}
+.csel{flex:1 1 150px;min-width:0;border:0;background:var(--fill);border-radius:10px;padding:8px 10px;outline:none}
+.cname:focus,.csel:focus{box-shadow:0 0 0 2px var(--blue)}
+.ccnt{font-size:12px;font-weight:600;color:var(--sub);background:var(--fill);border-radius:999px;padding:3px 9px;flex:none}
+.cdel.off{opacity:.35}
+.cdel{border:0;background:color-mix(in srgb,var(--red) 14%,transparent);color:var(--red);width:32px;height:32px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;flex:none}
+.cadd{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cadd .inp{flex:1 1 100%;width:auto}
+.cadd .csel{flex:1 1 150px}
+.cadd .btn{flex:0 0 auto;width:auto;padding:10px 18px}
+@media(max-width:600px){.crow .csel{order:3;flex:1 1 100%}}
+
+/* ───────── desktop ───────── */
+@media(min-width:900px){
+  body{padding-left:220px;padding-bottom:40px}
+  .top{max-width:1160px;margin:0 auto;padding:calc(22px + env(safe-area-inset-top)) 32px 12px}
+  h1{font-size:32px}
+  main{max-width:1160px;padding:8px 32px 56px}
+  #app{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+  #app>.card,#app>.stack>.card,#app>.grid{margin:0}
+  #app>.span2,#app>.note,#app>.grid{grid-column:1/-1}
+  #app>.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  #app>.narrow{grid-column:1/-1;width:100%;max-width:780px;margin:0 auto}
+  .stack{display:flex;flex-direction:column;gap:16px}
+  .card{padding:20px}
+  .big{font-size:46px}
+  .stat b{font-size:26px}
+  .tabs{top:0;bottom:auto;right:auto;width:220px;height:100vh;flex-direction:column;justify-content:flex-start;gap:4px;padding:30px 14px;border-top:0;border-right:.5px solid var(--line);background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .tabs::before{content:'Venituri extra';font-weight:700;font-size:20px;letter-spacing:-.3px;padding:0 12px 20px}
+  .tabs button{flex:none;flex-direction:row;gap:12px;font-size:15px;padding:10px 12px;border-radius:10px;justify-content:flex-start}
+  .tabs button:hover{background:var(--fill)}
+  .tabs button.on{background:color-mix(in srgb,var(--blue) 12%,transparent)}
+  .fab{right:40px;bottom:36px}
+  #toast{bottom:32px;left:calc(50% + 110px)}
+  .sheet{left:50%;right:auto;bottom:auto;top:50%;margin:0;width:min(520px,calc(100vw - 48px));max-height:88vh;border-radius:22px;padding:24px;transform:translate(-50%,-46%);opacity:0;visibility:hidden;transition:transform .22s,opacity .22s,visibility .22s}
+  .sheet.show{transform:translate(-50%,-50%);opacity:1;visibility:visible}
+  .cell{width:100%;min-width:90px}
+  th,td{padding-left:12px;padding-right:12px}
+  td{padding-top:7px;padding-bottom:7px}
+  .ent:hover,.seg button:hover:not(.on){background:var(--fill)}
+  .btn:hover{filter:brightness(1.06)}
+}
+</style>
+</head>
+<body>
+<header class="top"><h1 id="ttl">Sumar</h1><div class="hr"><div class="cur" id="cur" role="group" aria-label="Moneda de afișare"></div><select class="ysel" id="ysel" aria-label="An fiscal"></select></div></header>
+<main id="app"></main>
+<button class="fab" id="fab" data-a="add" aria-label="Adaugă venit">+</button>
+<nav class="tabs" id="tabs"></nav>
+<div class="scrim" id="scrim" data-a="close"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div id="toast"></div>
+<input type="file" id="file" accept="application/json,.json" hidden>
+
+<script>
+'use strict';
+/* Opțional: completează aici datele Supabase (altfel le poți introduce din Setări > Cloud) */
+const SUPABASE_URL = 'https://fvrnnghpzqoxvgefrboz.supabase.co', SUPABASE_KEY = 'sb_publishable_eVKyba2C-dCqfBfXP4PwDQ_2EiVLJTO';
+
+/* ───────── utilitare ───────── */
+const $ = (s, r = document) => r.querySelector(s);
+const MONTHS = ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
+const MINI = ['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Nov','Dec'];
+const LS = { e:'vx_entries', s:'vx_settings', c:'vx_cloud', y:'vx_year', t:'vx_tab', d:'vx_del', u:'vx_cur' };
+const jget = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (_) { return d; } };
+const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const P = v => { const x = parseFloat(String(v).replace(/\s/g, '').replace(',', '.')); return isFinite(x) ? x : 0; };
+const grp = s => s.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+const n0 = v => { v = Math.round(v || 0); return (v < 0 ? '−' : '') + grp(String(Math.abs(v))); };
+const n2 = v => { v = Math.round((v || 0) * 100) / 100; const [a, b] = Math.abs(v).toFixed(2).split('.'); return (v < 0 ? '−' : '') + grp(a) + ',' + b; };
+const lei = v => n0(v) + ' lei';
+/* moneda de afișare (Lei / EUR / USD): toate sumele sunt stocate în lei și convertite doar la afișare */
+const SFX = { RON:' lei', EUR:' €', USD:' $' };
+const rate = () => state.cur === 'EUR' ? state.settings.eur : state.cur === 'USD' ? state.settings.usd : 1;
+const cv = v => v / rate();
+const mny = v => n0(cv(v)) + SFX[state.cur];
+const alt = v => state.cur === 'RON' ? '≈ ' + n0(v / state.settings.eur) + ' eur' : '≈ ' + n0(v) + ' lei';
+const todayISO = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10));
+const NOW = new Date(), CY = NOW.getFullYear();
+
+const DEF = { eur:5.25, usd:4.5, tradeRate:16, cassRate:10, warn:90, sm:{ 2026:4050, 2027:4325 } };
+/* Categorii de venituri: tax 'withheld' = impozit reținut la sursă (suma se introduce netă, intră doar în baza CASS);
+   tax 'self' = impozit calculat de aplicație pe câștigul net anual (ex. trading). */
+const PAL = ['blue', 'green', 'orange', 'red', 'purple', 'teal', 'pink', 'gray'];
+const defaultCats = () => [
+  { id:'div', name:'Dividende', color:'blue', tax:'withheld' },
+  { id:'trade', name:'Trading', color:'green', tax:'self' },
+  { id:'other', name:'Altele', color:'orange', tax:'withheld' }
+];
+function normSettings(S) {
+  S.sm = Object.assign({}, DEF.sm, S.sm || {});
+  let c = Array.isArray(S.cats) ? S.cats.filter(x => x && x.id && typeof x.name === 'string') : [];
+  if (!c.length) c = defaultCats();
+  S.cats = c.map(x => ({ id:String(x.id), name:String(x.name).trim().slice(0, 30) || 'Categorie', color:PAL.includes(x.color) ? x.color : 'blue', tax:x.tax === 'self' ? 'self' : 'withheld' }));
+  return S;
+}
+const state = {
+  entries: jget(LS.e, []),
+  settings: normSettings(Object.assign({}, DEF, jget(LS.s, {}))),
+  year: jget(LS.y, CY + 1),
+  tab: jget(LS.t, 'sumar'),
+  cur: ['RON','EUR','USD'].includes(jget(LS.u, 'RON')) ? jget(LS.u, 'RON') : 'RON',
+  del: jget(LS.d, []),
+  user: null, sim: { v:'', t:'div' }
+};
+const cats = () => state.settings.cats;
+const catOf = id => cats().find(c => c.id === id) || { id, name:String(id), color:'gray', tax:'withheld' };
+const catColor = c => 'var(--' + c.color + ')';
+const isSelf = id => catOf(id).tax === 'self';
+/* înregistrări a căror categorie lipsește din setări (import, alt dispozitiv): o recreăm, ca să nu se piardă bani din calcul */
+function ensureCats() {
+  for (const e of state.entries) if (!cats().some(c => c.id === e.tip)) {
+    const d = defaultCats().find(x => x.id === e.tip);
+    state.settings.cats = cats().concat([d || { id:e.tip, name:'Necategorizat', color:'gray', tax:'withheld' }]);
+  }
+}
+ensureCats();
+const smFor = (y, S = state.settings) => S.sm[y] ?? (y <= 2026 ? 4050 : 4325);
+
+function persist() { ensureCats(); jset(LS.e, state.entries); jset(LS.s, state.settings); jset(LS.d, state.del); jset(LS.y, state.year); jset(LS.t, state.tab); jset(LS.u, state.cur); }
+
+/* Date inițiale din Excel-ul 2026 — se încarcă o singură dată, pe un dispozitiv fără date.
+   ID-uri fixe: la sincronizarea cu Supabase nu apar dubluri. Poți șterge acest bloc după prima rulare. */
+const SEED = [
+  { id:'102740f3-4e1b-4fb8-baef-ea5a5325c5ae', data:'2026-03-31', tip:'trade', suma:653,   moneda:'USD', curs:4.341501, nota:'Apex' },
+  { id:'e5aeadd8-c253-4d6a-8b85-4e7519945856', data:'2026-04-30', tip:'trade', suma:503,   moneda:'USD', curs:4.330020, nota:'Apex' },
+  { id:'b6f7ca24-95af-4e90-a0b4-0357b939b7d9', data:'2026-05-31', tip:'trade', suma:1261,  moneda:'USD', curs:4.474941, nota:'Apex' },
+  { id:'fa08ae2c-afe0-4898-a3ca-37c17ab07bfb', data:'2026-06-30', tip:'trade', suma:505,   moneda:'USD', curs:4.534653, nota:'Apex' },
+  { id:'a638d155-bcc7-46ad-8c87-3219ef8938b9', data:'2026-09-15', tip:'div',   suma:10000, moneda:'RON', curs:1,        nota:'Dividende' }
+];
+if (!jget('vx_seeded', false) && !state.entries.length) {
+  state.entries = SEED.map(e => ({ ...e, _p:1 }));
+  state.year = 2026;
+  jset('vx_seeded', true);
+  persist();
+}
+
+/* ───────── calcul fiscal ───────── */
+function cassBase(c, T) { return c >= T[2] ? T[2] : c >= T[1] ? T[1] : c >= T[0] ? T[0] : 0; }
+function stat(c, T, warn) {
+  const w = warn / 100;
+  if (c >= T[2]) return { k:'max', t:'PLAFON MAXIM' };
+  const next = c < T[0] ? T[0] : c < T[1] ? T[1] : T[2];
+  if (c >= w * next) return { k:'warn', t:'ATENȚIE' };
+  return c >= T[0] ? { k:'cass', t:'CASS DATORAT' } : { k:'ok', t:'OK' };
+}
+function calcYear(entries, year, S) {
+  const sm = smFor(year, S), T = [6, 12, 24].map(k => k * sm), cs = S.cats || defaultCats();
+  const self = id => { const c = cs.find(x => x.id === id); return !!c && c.tax === 'self'; };
+  const M = Array.from({ length:12 }, () => ({ by:{}, tot:0, self:0 })), by = {};
+  for (const e of entries) {
+    if (+e.data.slice(0, 4) !== year) continue;
+    const m = +e.data.slice(5, 7) - 1, l = e.suma * (e.moneda === 'RON' ? 1 : e.curs);
+    M[m].by[e.tip] = (M[m].by[e.tip] || 0) + l; M[m].tot += l; if (self(e.tip)) M[m].self += l;
+    by[e.tip] = (by[e.tip] || 0) + l;
+  }
+  let cum = 0, cumSelf = 0, pTax = 0, pCass = 0;
+  const rows = M.map((x, i) => {
+    cum += x.tot; cumSelf += x.self;
+    const taxC = S.tradeRate / 100 * Math.max(0, cumSelf), cassC = cassBase(cum, T) * S.cassRate / 100;
+    const r = { i, by:x.by, tot:x.tot, cum, tax:taxC - pTax, cass:cassC - pCass, taxes:(taxC - pTax) + (cassC - pCass), st:stat(cum, T, S.warn) };
+    pTax = taxC; pCass = cassC; return r;
+  });
+  const taxes = pTax + pCass;
+  return { sm, T, rows, by, income:cum, taxTrade:pTax, cass:pCass, taxes, net:cum - taxes, st:stat(cum, T, S.warn) };
+}
+const calc = () => calcYear(state.entries, state.year, state.settings);
+
+/* ───────── stocare + cloud ───────── */
+let sb = null;
+const TBL = 'venituri_extra', TBS = 'venituri_extra_setari';
+const toRow = e => ({ id:e.id, user_id:state.user.id, data:e.data, tip:e.tip, suma:e.suma, moneda:e.moneda, curs:e.curs, nota:e.nota || null });
+const fromRow = r => ({ id:r.id, data:r.data, tip:r.tip, suma:+r.suma, moneda:r.moneda, curs:+r.curs, nota:r.nota || '' });
+const cloudOn = () => !!(sb && state.user);
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+function cloudCfg() { const c = jget(LS.c, {}); return { url:SUPABASE_URL || c.url || '', key:SUPABASE_KEY || c.key || '' }; }
+
+async function initCloud() {
+  const { url, key } = cloudCfg();
+  if (!url || !key || !navigator.onLine) return;
+  try {
+    if (!window.supabase) await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+    sb = window.supabase.createClient(url, key);
+    const { data } = await sb.auth.getSession();
+    state.user = data.session ? data.session.user : null;
+    if (state.user) await syncCloud();
+  } catch (err) { toast('Cloud indisponibil: ' + (err.message || err)); }
+  render();
+}
+async function flush() {
+  if (!cloudOn()) return;
+  for (const e of state.entries.filter(x => x._p)) {
+    const { error } = await sb.from(TBL).upsert(toRow(e));
+    if (!error) delete e._p;
+  }
+  for (const id of [...state.del]) {
+    const { error } = await sb.from(TBL).delete().eq('id', id);
+    if (!error) state.del = state.del.filter(x => x !== id);
+  }
+}
+async function syncCloud() {
+  await flush();
+  const { data, error } = await sb.from(TBL).select('*').order('data');
+  if (error) throw error;
+  const pend = state.entries.filter(x => x._p);
+  state.entries = data.map(fromRow).concat(pend);
+  const s = await sb.from(TBS).select('data').maybeSingle();
+  if (s.data && s.data.data && Object.keys(s.data.data).length) {
+    const localCats = state.settings.cats;
+    state.settings = Object.assign({}, DEF, s.data.data);
+    if (!Array.isArray(state.settings.cats) || !state.settings.cats.length) state.settings.cats = localCats;
+    normSettings(state.settings);
+  }
+  persist();
+}
+async function pushSettings() {
+  persist();
+  if (!cloudOn()) return;
+  const { error } = await sb.from(TBS).upsert({ user_id:state.user.id, data:state.settings, updated_at:new Date().toISOString() });
+  if (error) toast('Setări salvate local; cloud: ' + error.message);
+}
+async function saveEntry(e) {
+  const i = state.entries.findIndex(x => x.id === e.id);
+  if (i >= 0) state.entries[i] = e; else state.entries.push(e);
+  if (cloudOn()) {
+    const { error } = await sb.from(TBL).upsert(toRow(e));
+    if (error) { e._p = 1; toast('Salvat local; se sincronizează mai târziu'); }
+  }
+  persist();
+}
+/* Celulele din tabelul lunar: setează totalul lunii pentru o categorie, fără să piardă înregistrările existente */
+async function setCell(y, m, tip, val) {
+  const iso = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(new Date(y, m + 1, 0).getDate()).padStart(2, '0');
+  const inM = f => state.entries.filter(e => +e.data.slice(0, 4) === y && +e.data.slice(5, 7) - 1 === m && f(e));
+  const toLei = e => e.suma * (e.moneda === 'RON' ? 1 : e.curs), R2 = x => Math.round(x * 100) / 100;
+  const mk = (tip, suma, moneda, curs, nota) => ({ id:uid(), data:iso, tip, suma, moneda, curs, nota });
+  if (val < 0 && !isSelf(tip)) { toast('„' + catOf(tip).name + '” nu poate fi negativ (impozit reținut la sursă).'); return; }
+  const L = inM(e => e.tip === tip), cur = L.reduce((a, e) => a + toLei(e), 0);
+  if (R2(val) === R2(cur)) return;
+  if (!L.length) return saveEntry(mk(tip, val, 'RON', 1, 'Lunar'));
+  if (L.length === 1) {
+    const e = L[0];
+    if (!val) return removeEntry(e.id);
+    if (e.moneda === 'RON' || !e.suma || val * e.suma <= 0) return saveEntry({ ...e, suma:val, moneda:'RON', curs:1 });
+    return saveEntry({ ...e, curs:val / e.suma });
+  }
+  return saveEntry(mk(tip, val - cur, 'RON', 1, 'Ajustare'));
+}
+async function removeEntry(id) {
+  state.entries = state.entries.filter(x => x.id !== id);
+  if (cloudOn()) {
+    const { error } = await sb.from(TBL).delete().eq('id', id);
+    if (error) state.del.push(id);
+  }
+  persist();
+}
+
+/* ───────── UI: piese ───────── */
+const ICON = {
+  sumar:'<svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  venituri:'<svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>',
+  lunar:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>',
+  setari:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>'
+};
+const TABS = [['sumar','Sumar'],['venituri','Venituri'],['lunar','Lunar'],['setari','Setări']];
+let toastT;
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 3200); }
+const chip = st => `<span class="chip ${st.k}">${st.t}</span>`;
+
+function chartSvg(R) {
+  const W = 340, H = 172, L = 8, Rr = 8, Tp = 14, B = 22, w = W - L - Rr, h = H - Tp - B;
+  let last = -1; R.rows.forEach((r, i) => { if (r.tot !== 0) last = i; });
+  if (state.year === CY) last = Math.max(last, NOW.getMonth());
+  if (last < 0) return '<div class="empty">Nicio încasare în ' + state.year + ' încă.</div>';
+  const vals = [0, ...R.rows.slice(0, last + 1).map(r => r.cum)], mx = Math.max(...vals, 0), T = R.T;
+  let ymax = Math.max(mx * 1.15, T[0] * 1.18);
+  if (mx > T[0] * .85) ymax = Math.max(ymax, T[1] * 1.1);
+  if (mx > T[1] * .85) ymax = Math.max(ymax, T[2] * 1.1);
+  const X = i => L + w * i / 12, Y = v => Tp + h * (1 - Math.max(v, 0) / ymax);
+  const pts = vals.map((v, i) => [X(i), Y(v)]);
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const area = line + ` L${pts[pts.length - 1][0].toFixed(1)} ${Y(0)} L${X(0)} ${Y(0)}Z`;
+  let g = '';
+  [0, 1, 2].forEach(k => { if (T[k] < ymax) g += `<line x1="${L}" x2="${W - Rr}" y1="${Y(T[k])}" y2="${Y(T[k])}" stroke="var(--orange)" stroke-width="1" stroke-dasharray="4 4" opacity=".8"/><text x="${W - Rr}" y="${Y(T[k]) - 4}" text-anchor="end" font-size="9.5" font-weight="600" fill="var(--orange)">${[6,12,24][k]} SM</text>`; });
+  let lab = ''; for (let i = 1; i <= 12; i++) lab += `<text x="${X(i)}" y="${H - 6}" text-anchor="middle" font-size="9.5" fill="var(--sub)">${MINI[i - 1][0]}</text>`;
+  return `<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Venit cumulativ"><defs><linearGradient id="gr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--blue)" stop-opacity=".28"/><stop offset="1" stop-color="var(--blue)" stop-opacity="0"/></linearGradient></defs>
+  <line x1="${L}" x2="${W - Rr}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--line)"/>${g}<path d="${area}" fill="url(#gr)"/><path d="${line}" fill="none" stroke="var(--blue)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${pts[pts.length - 1][0]}" cy="${pts[pts.length - 1][1]}" r="3.6" fill="var(--blue)"/>${lab}</svg>`;
+}
+
+/* ───────── ecrane ───────── */
+function vSumar() {
+  if (!cats().some(c => c.id === state.sim.t)) state.sim.t = cats()[0].id;
+  const R = calc(), S = state.settings, T = R.T, c = R.income, cr = S.cassRate / 100;
+  const pos = v => Math.min(100, v / T[2] * 100).toFixed(2);
+  let msg;
+  if (c < T[0]) msg = `Mai poți încasa <b>${mny(T[0] - c)}</b> până la pragul de 6 SM (${mny(T[0])}). Dincolo de el apare CASS de ${mny(T[0] * cr)}.`;
+  else if (c < T[1]) msg = `CASS datorat: <b>${mny(T[0] * cr)}</b>. Mai ai ${mny(T[1] - c)} până la 12 SM, când CASS devine ${mny(T[1] * cr)}.`;
+  else if (c < T[2]) msg = `CASS datorat: <b>${mny(T[1] * cr)}</b>. Mai ai ${mny(T[2] - c)} până la 24 SM, când CASS devine ${mny(T[2] * cr)}.`;
+  else msg = `Ai atins plafonul de 24 SM — CASS fix <b>${mny(T[2] * cr)}</b>, indiferent de câștiguri.`;
+  // simulator
+  let sim = '';
+  const sv = P(state.sim.v) * rate();
+  if (sv) {
+    const R2 = calcYear(state.entries.concat([{ data:state.year + '-12-31', tip:state.sim.t, suma:sv, moneda:'RON', curs:1 }]), state.year, S);
+    const d = (a, b) => (a - b >= 0 ? '+' : '−') + mny(Math.abs(a - b));
+    sim = `<div class="sub" style="margin-top:12px;line-height:1.6">Venit cumulat: <b>${mny(R2.income)}</b> · ${chip(R2.st)}<br>Taxe: <b>${mny(R2.taxes)}</b> (${d(R2.taxes, R.taxes)}) · Net: <b>${mny(R2.net)}</b> (${d(R2.net, R.net)})</div>`;
+  }
+  const dl = new Date(state.year + 1, 4, 25), days = Math.ceil((dl - new Date(todayISO() + 'T00:00:00')) / 864e5);
+  return `
+  <div class="card hero"><div class="sub">Net estimat ${state.year} (după taxe)</div>
+    <div class="big">${mny(R.net)}</div><div class="sub" style="margin-bottom:10px">${alt(R.net)}</div>${chip(R.st)}</div>
+  <div class="card"><h3>Prag CASS</h3>
+    <div class="bar"><i style="width:${pos(c)}%"></i>
+      <u style="left:25%"></u><em style="left:25%">6 SM</em><small style="left:25%">${n0(cv(T[0]))}</small>
+      <u style="left:50%"></u><em style="left:50%">12 SM</em><small style="left:50%">${n0(cv(T[1]))}</small>
+      <u style="left:100%"></u><em style="left:100%;transform:translateX(-100%)">24 SM</em><small style="left:100%;transform:translateX(-100%)">${n0(cv(T[2]))}</small></div>
+    <div style="font-size:15px;line-height:1.45">${msg}</div></div>
+  <div class="grid">
+    <div class="stat"><span>Venit cumulat</span><b>${mny(c)}</b></div>
+    <div class="stat"><span>Impozit calculat (${S.tradeRate}%)</span><b>${mny(R.taxTrade)}</b></div>
+    <div class="stat"><span>CASS (${S.cassRate}%)</span><b>${mny(R.cass)}</b></div>
+    <div class="stat"><span>Total taxe</span><b>${mny(R.taxes)}</b></div></div>
+  <div class="card"><h3>Venit cumulativ</h3>${chartSvg(R)}</div>
+  <div class="stack"><div class="card"><h3>Simulator</h3>
+    <div class="sub" style="margin-bottom:8px">Ce se întâmplă dacă mai încasez încă o sumă în ${state.year}?</div>
+    <div class="two"><input class="inp" id="simv" inputmode="decimal" placeholder="Sumă (${SFX[state.cur].trim()})" value="${esc(state.sim.v)}">
+    <select class="inp" id="simt" aria-label="Categorie">${cats().map(c => `<option value="${esc(c.id)}" ${c.id === state.sim.t ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></div>${sim}</div>
+  <div class="card"><h3>Declarația unică (D212)</h3><div style="font-size:15px">Pentru veniturile din ${state.year}: termen <b>25 mai ${state.year + 1}</b>${days > 0 ? ` <span class="sub">(peste ${days} zile)</span>` : ''}.</div></div></div>
+  <div class="note span2">Estimare orientativă, nu consultanță fiscală. Categoriile cu impozit reținut la sursă (ex. dividende) se introduc nete și intră doar în baza CASS. La categoriile cu impozit calculat (ex. trading), impozitul se calculează anual pe câștigul net, iar câștigul net intră în baza CASS. Pragurile folosesc salariul minim de la 1 ianuarie ${state.year}: ${mny(R.sm)}.</div>`;
+}
+
+function vVenituri() {
+  const list = state.entries.filter(e => +e.data.slice(0, 4) === state.year).sort((a, b) => b.data.localeCompare(a.data));
+  if (!list.length) return `<div class="narrow"><div class="card empty">Niciun venit în ${state.year}.<br>Apasă <b>+</b> ca să adaugi primul.</div></div>`;
+  let h = '', cur = -1;
+  const mt = m => list.filter(e => +e.data.slice(5, 7) - 1 === m).reduce((a, e) => a + e.suma * (e.moneda === 'RON' ? 1 : e.curs), 0);
+  for (const e of list) {
+    const m = +e.data.slice(5, 7) - 1;
+    if (m !== cur) { if (cur !== -1) h += '</div>'; cur = m; h += `<div class="mh"><span>${MONTHS[m]}</span><span>${mny(mt(m))}</span></div><div class="list">`; }
+    const t = catOf(e.tip), l = e.suma * (e.moneda === 'RON' ? 1 : e.curs);
+    h += `<div class="ent" data-a="edit" data-id="${e.id}"><span class="dot" style="background:${catColor(t)}"></span>
+      <div class="m"><div>${esc(t.name)}${e.nota ? ' · <span class="sub">' + esc(e.nota) + '</span>' : ''}</div><div class="sub">${+e.data.slice(8)} ${MINI[m]}${e.moneda !== 'RON' ? ' · curs ' + String(e.curs).replace('.', ',') : ''}</div></div>
+      <div class="r"><div class="${l < 0 ? 'neg' : ''}"><b>${mny(l)}</b></div>${e.moneda !== 'RON' ? `<div class="sub">${n2(e.suma)} ${e.moneda}</div>` : ''}</div></div>`;
+  }
+  return '<div class="narrow">' + h + '</div></div>';
+}
+
+function vLunar() {
+  const R = calc(), S = state.settings, C = cats(), u = SFX[state.cur].trim(), z = v => v ? n0(cv(v)) : '–', cl = v => v ? '' : ' class="z"';
+  const cell = (i, c, v) => `<td><input class="cell" data-m="${i}" data-k="${esc(c.id)}" inputmode="${c.tax === 'self' ? 'text' : 'decimal'}" placeholder="–" aria-label="${MONTHS[i]} · ${esc(c.name)}" value="${v ? String(Math.round(cv(v) * 100) / 100).replace('.', ',') : ''}"></td>`;
+  const av = v => v ? (state.cur === 'RON' ? n0(v / S.eur) : n0(v)) : '–';
+  let rows = '';
+  R.rows.forEach(r => {
+    rows += `<tr><td>${MONTHS[r.i]}</td>${C.map(c => cell(r.i, c, r.by[c.id] || 0)).join('')}<td${cl(r.tot)}>${z(r.tot)}</td><td>${n0(cv(r.cum))}</td><td${cl(r.tax)}>${z(r.tax)}</td><td${cl(r.cass)}>${z(r.cass)}</td><td${cl(r.taxes)}>${z(r.taxes)}</td><td><span class="chip ${r.st.k}">${r.st.k === 'ok' ? 'OK' : r.st.k === 'warn' ? 'ATENȚIE' : r.st.k === 'cass' ? 'CASS' : 'MAX'}</span></td></tr>`;
+  });
+  const tiers = [[0, '6–12 SM'], [1, '12–24 SM'], [2, '> 24 SM']].map(([a, l]) => `<tr><td>${l}</td><td>${mny(R.T[a])}</td><td>${mny(R.T[a] * S.cassRate / 100)}</td></tr>`).join('');
+  return `<div class="card span2"><h3>Pe luni — ${state.year} · ${u}</h3>
+    <div class="sub" style="margin:-4px 0 8px">Completează direct în tabel coloanele de venituri (valori în ${u}); restul se calculează singur. Pierderile se scriu cu minus, la categoriile cu impozit calculat. Categoriile se gestionează din Setări.</div><div class="tw"><table>
+    <tr><th>Luna</th>${C.map(c => `<th>${esc(c.name)}</th>`).join('')}<th>Total lunar</th><th>Cumulat</th><th>Impozit</th><th>CASS</th><th>Taxe</th><th>Stare</th></tr>${rows}
+    <tr class="tot"><td>TOTAL</td>${C.map(c => `<td>${z(R.by[c.id])}</td>`).join('')}<td>${n0(cv(R.income))}</td><td class="y">${n0(cv(R.income))}</td><td>${n0(cv(R.taxTrade))}</td><td>${n0(cv(R.cass))}</td><td class="o">${n0(cv(R.taxes))}</td><td>${S.tradeRate} %</td></tr>
+    <tr class="eur"><td>${state.cur === 'RON' ? 'în eur' : 'în lei'}</td>${C.map(c => `<td>${av(R.by[c.id])}</td>`).join('')}<td>${av(R.income)}</td><td>${av(R.income)}</td><td>${av(R.taxTrade)}</td><td>${av(R.cass)}</td><td>${av(R.taxes)}</td><td></td></tr></table></div></div>
+  <div class="card"><h3>Total net</h3><div class="big" style="font-size:32px">${mny(R.net)}</div><div class="sub">${alt(R.net)} · venit ${mny(R.income)} · taxe ${mny(R.taxes)} · curs EUR ${String(S.eur).replace('.', ',')} · USD ${String(S.usd).replace('.', ',')}</div></div>
+  <div class="card"><h3>Praguri CASS ${state.year}</h3><div class="tw"><table><tr><th>Interval</th><th>Bază</th><th>CASS</th></tr>${tiers}</table></div></div>`;
+}
+
+function vSetari() {
+  const S = state.settings, cc = cloudCfg(), sm = smFor(state.year);
+  const f = (lab, k, v, extra = '') => `<div class="lrow"><label>${lab}</label><input data-s="${k}" inputmode="decimal" value="${String(v).replace('.', ',')}" ${extra}></div>`;
+  const cloud = cloudOn()
+    ? `<div class="sub" style="margin-bottom:10px">Conectat ca <b>${esc(state.user.email)}</b>. Datele se sincronizează cu Supabase.</div>
+       <div class="btns"><button class="btn sec" data-a="sync">Sincronizează</button><button class="btn sec" data-a="pushlocal">Încarcă datele locale</button></div>
+       <div class="btns"><button class="btn del" data-a="logout">Deconectare</button></div>`
+    : `<div class="sub" style="margin-bottom:10px">${sb ? 'Autentifică-te ca să sincronizezi între dispozitive.' : 'Opțional. Fără cloud, datele rămân doar pe acest dispozitiv.'}</div>
+       ${SUPABASE_URL ? '' : `<div class="fld"><input class="inp" id="c-url" placeholder="Supabase URL" value="${esc(cc.url)}"></div><div class="fld"><input class="inp" id="c-key" placeholder="Supabase anon key" value="${esc(cc.key)}"></div>`}
+       <div class="fld"><input class="inp" id="c-mail" type="email" placeholder="Email" autocomplete="username"></div>
+       <div class="fld"><input class="inp" id="c-pass" type="password" placeholder="Parolă" autocomplete="current-password"></div>
+       <div class="btns"><button class="btn" data-a="login">Conectare</button><button class="btn sec" data-a="signup">Cont nou</button></div>`;
+  const taxSel = (cur, extra = '') => `<select class="csel" ${extra}><option value="withheld" ${cur === 'withheld' ? 'selected' : ''}>Impozit reținut la sursă</option><option value="self" ${cur === 'self' ? 'selected' : ''}>Impozit calculat (${S.tradeRate}%)</option></select>`;
+  const catRows = S.cats.map(c => { const n = state.entries.filter(e => e.tip === c.id).length; return `<div class="crow">
+    <button class="cdot" data-a="catcolor" data-id="${esc(c.id)}" style="background:${catColor(c)}" aria-label="Schimbă culoarea"></button>
+    <input class="cname" data-c="name" data-id="${esc(c.id)}" maxlength="30" value="${esc(c.name)}" aria-label="Nume categorie">
+    ${taxSel(c.tax, `data-c="tax" data-id="${esc(c.id)}" aria-label="Tratament fiscal"`)}
+    ${n ? `<span class="ccnt" title="Înregistrări în această categorie">${n}</span>` : ''}
+    <button class="cdel${n ? ' off' : ''}" data-a="catdel" data-id="${esc(c.id)}" aria-label="Șterge categoria" ${n ? 'aria-disabled="true" title="Are înregistrări, nu poate fi ștearsă"' : ''}>✕</button></div>`; }).join('');
+  return `
+  <div class="card"><h3>Anul ${state.year}</h3>
+    ${f('Salariu minim brut la 1 ian. (lei)', 'sm', sm)}
+    <div class="sub" style="padding-top:8px">Praguri: 6 SM = ${lei(6 * sm)} · 12 SM = ${lei(12 * sm)} · 24 SM = ${lei(24 * sm)}.${state.year > CY ? ' Pentru ' + state.year + ' valoarea e o presupunere (4.325 lei, în vigoare din 1 iulie 2026); modific-o dacă se schimbă.' : ''}</div></div>
+  <div class="card"><h3>Reguli și cursuri</h3>
+    ${f('Impozit pe câștiguri (%)', 'tradeRate', S.tradeRate)}
+    ${f('CASS (%)', 'cassRate', S.cassRate)}
+    ${f('Avertizare la (% din prag)', 'warn', S.warn)}
+    ${f('Curs EUR → lei (afișare)', 'eur', S.eur)}
+    ${f('Curs USD → lei (implicit și afișare)', 'usd', S.usd)}</div>
+  <div class="card"><h3>Categorii de venituri</h3>
+    <div class="clist">${catRows}</div>
+    <div class="cadd"><input class="inp" id="nc-name" maxlength="30" placeholder="Categorie nouă (ex. Dobânzi, Crypto)">${taxSel('withheld', 'id="nc-tax" aria-label="Tratament fiscal"')}<button class="btn" data-a="catadd">Adaugă</button></div>
+    <div class="sub" style="padding-top:10px;line-height:1.45"><b>Impozit reținut la sursă</b>: suma se introduce netă și intră doar în baza CASS (dividende, dobânzi). <b>Impozit calculat</b>: aplicația calculează impozitul pe câștigul net anual (trading, crypto). Atinge cercul colorat ca să schimbi culoarea. O categorie se poate șterge doar dacă nu are înregistrări (numărul din dreapta arată câte are).</div></div>
+  <div class="card"><h3>Date</h3>
+    <div class="btns" style="margin-top:0"><button class="btn sec" data-a="export">Export JSON</button><button class="btn sec" data-a="exportcsv">Export CSV</button></div>
+    <div class="btns"><button class="btn sec" data-a="import">Import JSON</button></div></div>
+  <div class="card"><h3>Cloud (Supabase)</h3>${cloud}</div>
+  ${deferred ? `<div class="card"><h3>Aplicație</h3><button class="btn" data-a="install">Instalează pe telefon</button></div>` : ''}
+  <div class="note">Venituri extra · versiunea 1.0. Datele sunt stocate local pe dispozitiv${cloudOn() ? ' și în Supabase' : ''}.</div>`;
+}
+
+const VIEWS = { sumar:vSumar, venituri:vVenituri, lunar:vLunar, setari:vSetari };
+function years() {
+  const s = new Set([CY, CY + 1, state.year]);
+  state.entries.forEach(e => s.add(+e.data.slice(0, 4)));
+  return [...s].sort((a, b) => b - a);
+}
+const cellAt = (m, k) => [...document.querySelectorAll('.cell')].find(n => n.dataset.m === String(m) && n.dataset.k === String(k));
+function render() {
+  const ae = document.activeElement, fk = ae && ae.classList && ae.classList.contains('cell') ? [ae.dataset.m, ae.dataset.k] : null;
+  $('#app').innerHTML = VIEWS[state.tab]();  $('#ttl').textContent = TABS.find(t => t[0] === state.tab)[1];
+  $('#cur').innerHTML = [['RON', 'Lei'], ['EUR', 'EUR'], ['USD', 'USD']].map(([k, l]) => `<button data-a="cur" data-v="${k}" class="${k === state.cur ? 'on' : ''}">${l}</button>`).join('');
+  $('#ysel').innerHTML = years().map(y => `<option value="${y}" ${y === state.year ? 'selected' : ''}>${y}</option>`).join('');
+  $('#tabs').innerHTML = TABS.map(([k, l]) => `<button data-a="tab" data-v="${k}" class="${k === state.tab ? 'on' : ''}">${ICON[k]}${l}</button>`).join('');
+  $('#fab').style.display = state.tab === 'venituri' || state.tab === 'sumar' ? '' : 'none';
+  if (fk) { const n = cellAt(fk[0], fk[1]); if (n) n.focus(); }
+}
+
+/* ───────── fișa de adăugare/editare ───────── */
+let sh = null;
+const hint = id => isSelf(id) ? `Profit sau pierdere realizată. Impozitul de ${state.settings.tradeRate}% se calculează anual pe câștigul net.` : 'Introdu suma netă încasată (după impozitul reținut la sursă). Intră în baza CASS.';
+function openSheet(id) {
+  const e = id ? state.entries.find(x => x.id === id) : null;
+  sh = { id:e ? e.id : null, tip:e ? e.tip : cats()[0].id, moneda:e ? e.moneda : 'RON', sign:e && e.suma < 0 ? -1 : 1 };
+  const d0 = e ? e.data : (state.year === CY ? todayISO() : state.year + '-01-01');
+  $('#sheet').innerHTML = `<h2>${e ? 'Editează venit' : 'Venit nou'}</h2>
+    <div class="fld"><div class="seg wrap" id="s-tip">${cats().map(c => `<button data-a="seg" data-g="tip" data-v="${esc(c.id)}">${esc(c.name)}</button>`).join('')}</div><div class="note" id="s-hint" style="padding:6px 4px 0"></div></div>
+    <div class="fld" id="s-sign"><span>Rezultat</span><div class="seg"><button data-a="seg" data-g="sign" data-v="1">Profit</button><button data-a="seg" data-g="sign" data-v="-1">Pierdere</button></div></div>
+    <div class="two"><div class="fld"><span>Data</span><input class="inp" id="f-data" type="date" value="${d0}"></div>
+    <div class="fld"><span>Monedă</span><div class="seg">${['RON', 'USD', 'EUR'].map(m => `<button data-a="seg" data-g="moneda" data-v="${m}">${m === 'RON' ? 'Lei' : m}</button>`).join('')}</div></div></div>
+    <div class="two"><div class="fld"><span>Sumă</span><input class="inp" id="f-suma" inputmode="decimal" placeholder="0" value="${e ? String(Math.abs(e.suma)).replace('.', ',') : ''}"></div>
+    <div class="fld" id="s-curs"><span>Curs → lei</span><input class="inp" id="f-curs" inputmode="decimal" value="${e && e.moneda !== 'RON' ? String(e.curs).replace('.', ',') : ''}"></div></div>
+    <div class="sub" id="s-prev" style="margin:-4px 4px 12px"></div>
+    <div class="fld"><span>Notă (opțional)</span><input class="inp" id="f-nota" maxlength="80" value="${e ? esc(e.nota) : ''}"></div>
+    <div class="btns"><button class="btn sec" data-a="close">Anulează</button><button class="btn" data-a="save">Salvează</button></div>
+    ${e ? '<div class="btns"><button class="btn del" data-a="del">Șterge</button></div>' : ''}`;
+  paintSheet();
+  $('#scrim').classList.add('show'); $('#sheet').classList.add('show');
+}
+function paintSheet() {
+  document.querySelectorAll('#sheet [data-g]').forEach(b => b.classList.toggle('on', String(sh[b.dataset.g]) === b.dataset.v));
+  $('#s-hint').textContent = hint(sh.tip);
+  $('#s-sign').style.display = isSelf(sh.tip) ? '' : 'none';
+  $('#s-curs').style.display = sh.moneda === 'RON' ? 'none' : '';
+  const a = P($('#f-suma').value), c = sh.moneda === 'RON' ? 1 : P($('#f-curs').value), s = isSelf(sh.tip) ? sh.sign : 1;
+  $('#s-prev').textContent = a ? '= ' + n2(a * c * s) + ' lei' : '';
+}
+function closeSheet() { $('#scrim').classList.remove('show'); $('#sheet').classList.remove('show'); sh = null; }
+async function submitSheet() {
+  const suma = P($('#f-suma').value), data = $('#f-data').value;
+  if (!suma) return toast('Introdu o sumă.');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) return toast('Alege o dată validă.');
+  let curs = 1;
+  if (sh.moneda !== 'RON') { curs = P($('#f-curs').value); if (!curs) return toast('Introdu cursul de schimb.'); }
+  const e = { id:sh.id || uid(), data, tip:sh.tip, suma:Math.abs(suma) * (isSelf(sh.tip) ? sh.sign : 1), moneda:sh.moneda, curs, nota:$('#f-nota').value.trim() };
+  state.year = +data.slice(0, 4);
+  closeSheet(); await saveEntry(e); render();
+}
+
+/* ───────── export / import ───────── */
+function download(name, text, type) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+const clean = e => ({ id:e.id, data:e.data, tip:e.tip, suma:e.suma, moneda:e.moneda, curs:e.curs, nota:e.nota || '' });
+async function importFile(file) {
+  try {
+    const j = JSON.parse(await file.text());
+    const arr = Array.isArray(j) ? j : j.entries;
+    if (!Array.isArray(arr)) throw new Error('format necunoscut');
+    let n = 0;
+    for (const x of arr) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(x.data) || !x.tip || typeof x.tip !== 'string' || !isFinite(+x.suma)) continue;
+      await saveEntry({ id:x.id || uid(), data:x.data, tip:x.tip, suma:+x.suma, moneda:x.moneda || 'RON', curs:+x.curs || 1, nota:x.nota || '' }); n++;
+    }
+    if (j.settings) {
+      const keep = state.settings.cats, inc = Array.isArray(j.settings.cats) ? j.settings.cats : [];
+      state.settings = Object.assign({}, state.settings, j.settings, { cats:keep.concat(inc.filter(c => c && c.id && !keep.some(k => k.id === c.id))) });
+      normSettings(state.settings);
+    }
+    await pushSettings();
+    render(); toast(n + ' înregistrări importate.');
+  } catch (err) { toast('Import eșuat: ' + err.message); }
+}
+
+/* ───────── evenimente ───────── */
+let deferred = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; if (state.tab === 'setari') render(); });
+window.addEventListener('online', async () => { if (cloudOn()) { try { await syncCloud(); render(); } catch (_) {} } else initCloud(); });
+
+document.addEventListener('click', async ev => {
+  const el = ev.target.closest('[data-a]'); if (!el) return;
+  const a = el.dataset.a, v = el.dataset.v;
+  try {
+    switch (a) {
+      case 'cur': state.cur = v; persist(); render(); break;
+      case 'tab': state.tab = v; persist(); render(); scrollTo(0, 0); break;
+      case 'add': openSheet(null); break;
+      case 'edit': openSheet(el.dataset.id); break;
+      case 'close': closeSheet(); break;
+      case 'seg': {
+        const g = el.dataset.g; sh[g] = g === 'sign' ? +v : v;
+        if (g === 'moneda') $('#f-curs').value = v === 'USD' ? String(state.settings.usd).replace('.', ',') : v === 'EUR' ? String(state.settings.eur).replace('.', ',') : '';
+        paintSheet(); break;
+      }
+      case 'save': await submitSheet(); break;
+      case 'del':
+        if (!sh.arm) { sh.arm = true; el.textContent = 'Sigur? Apasă încă o dată'; break; }
+        { const id = sh.id; closeSheet(); await removeEntry(id); render(); toast('Înregistrare ștearsă.'); }
+        break;
+      case 'catcolor': { const c = cats().find(x => x.id === el.dataset.id); if (c) { c.color = PAL[(PAL.indexOf(c.color) + 1) % PAL.length]; await pushSettings(); render(); } break; }
+      case 'catadd': {
+        const nm = ($('#nc-name').value || '').trim();
+        if (!nm) return toast('Scrie numele categoriei.');
+        if (cats().some(c => c.name.toLowerCase() === nm.toLowerCase())) return toast('Există deja o categorie cu acest nume.');
+        const used = new Set(cats().map(c => c.color)), color = PAL.find(x => !used.has(x)) || PAL[cats().length % PAL.length];
+        state.settings.cats = cats().concat([{ id:'c_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), name:nm.slice(0, 30), color, tax:$('#nc-tax').value === 'self' ? 'self' : 'withheld' }]);
+        await pushSettings(); render(); toast('Categorie adăugată.'); break;
+      }
+      case 'catdel': {
+        const c = cats().find(x => x.id === el.dataset.id); if (!c) break;
+        const n = state.entries.filter(e => e.tip === c.id).length;
+        if (n) return toast(`„${c.name}” are ${n} ${n === 1 ? 'înregistrare' : 'înregistrări'}. Șterge-le (Venituri sau tabelul Lunar) ori schimbă-le categoria, apoi o poți șterge.`);
+        if (cats().length <= 1) return toast('Trebuie să rămână cel puțin o categorie.');
+        state.settings.cats = cats().filter(x => x.id !== c.id);
+        if (state.sim.t === c.id) state.sim.t = cats()[0].id;
+        await pushSettings(); render(); toast('Categorie ștearsă.'); break;
+      }
+      case 'export': download('venituri-extra.json', JSON.stringify({ entries:state.entries.map(clean), settings:state.settings }, null, 2), 'application/json'); break;
+      case 'exportcsv': download('venituri-extra.csv', 'data,categorie,suma,moneda,curs,suma_lei,nota\n' + state.entries.slice().sort((x, y) => x.data.localeCompare(y.data)).map(e => [e.data, '"' + catOf(e.tip).name.replace(/"/g, '""') + '"', e.suma, e.moneda, e.curs, (e.suma * e.curs).toFixed(2), '"' + (e.nota || '').replace(/"/g, '""') + '"'].join(',')).join('\n'), 'text/csv'); break;
+      case 'import': $('#file').click(); break;
+      case 'install': if (deferred) { deferred.prompt(); await deferred.userChoice; deferred = null; render(); } break;
+      case 'login': case 'signup': {
+        const url = SUPABASE_URL || ($('#c-url') || {}).value || '', key = SUPABASE_KEY || ($('#c-key') || {}).value || '';
+        const email = $('#c-mail').value.trim(), password = $('#c-pass').value;
+        if (!url || !key) return toast('Completează URL-ul și cheia Supabase.');
+        if (!email || !password) return toast('Completează emailul și parola.');
+        jset(LS.c, { url:url.trim(), key:key.trim() });
+        if (!sb) { if (!window.supabase) await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'); sb = window.supabase.createClient(url.trim(), key.trim()); }
+        const r = a === 'login' ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
+        if (r.error) throw r.error;
+        if (!r.data.session) return toast('Verifică emailul pentru confirmarea contului, apoi conectează-te.');
+        state.user = r.data.session.user; await syncCloud(); render(); toast('Conectat.'); break;
+      }
+      case 'logout': await sb.auth.signOut(); state.user = null; render(); break;
+      case 'sync': await syncCloud(); render(); toast('Sincronizat.'); break;
+      case 'pushlocal': {
+        const rows = state.entries.map(toRow); const { error } = await sb.from(TBL).upsert(rows); if (error) throw error;
+        state.entries.forEach(e => delete e._p); persist(); await pushSettings(); toast(rows.length + ' înregistrări încărcate.'); break;
+      }
+    }
+  } catch (err) { toast(err.message || String(err)); }
+});
+
+document.addEventListener('input', ev => {
+  if (ev.target.id === 'f-suma' || ev.target.id === 'f-curs') paintSheet();
+  if (ev.target.id === 'simv') { state.sim.v = ev.target.value; clearTimeout(window._st); window._st = setTimeout(() => { const p = ev.target.selectionStart; render(); const i = $('#simv'); if (i) { i.focus(); i.setSelectionRange(p, p); } }, 350); }
+});
+document.addEventListener('change', async ev => {
+  const t = ev.target;
+  if (t.id === 'simt') { state.sim.t = t.value; render(); return; }
+  if (t.dataset && t.dataset.c) {           // editare categorie (fără re-randare, ca să nu se piardă un click pe butoanele vecine)
+    const c = cats().find(x => x.id === t.dataset.id);
+    if (c) {
+      if (t.dataset.c === 'name') {
+        const nm = t.value.trim().slice(0, 30);
+        if (nm && !cats().some(x => x !== c && x.name.toLowerCase() === nm.toLowerCase())) c.name = nm;
+        else { toast(nm ? 'Există deja o categorie cu acest nume.' : 'Numele nu poate fi gol.'); t.value = c.name; }
+      } else if (t.dataset.c === 'tax') c.tax = t.value === 'self' ? 'self' : 'withheld';
+      await pushSettings();
+    }
+    return;
+  }
+  if (t.dataset && t.dataset.k) { try { await setCell(state.year, +t.dataset.m, t.dataset.k, P(t.value) * rate()); } catch (err) { toast(err.message || String(err)); } render(); return; }
+  const k = t.dataset && t.dataset.s; if (!k) return;
+  const v = P(ev.target.value);
+  if (k === 'sm') state.settings.sm[state.year] = v > 0 ? v : smFor(state.year);
+  else if (v > 0) state.settings[k] = v;
+  await pushSettings(); render();
+});
+/* tabel lunar: Enter coboară la luna următoare, conținutul se selectează la focus */
+document.addEventListener('keydown', ev => {
+  const t = ev.target;
+  if (ev.key !== 'Enter' || !t.classList || !t.classList.contains('cell')) return;
+  ev.preventDefault();
+  const n = cellAt(+t.dataset.m + 1, t.dataset.k);
+  if (n) n.focus(); else t.blur();
+});
+document.addEventListener('focusin', ev => { if (ev.target.classList && ev.target.classList.contains('cell')) ev.target.select(); });
+$('#ysel').addEventListener('change', e => { state.year = +e.target.value; persist(); render(); });
+$('#file').addEventListener('change', e => { if (e.target.files[0]) importFile(e.target.files[0]); e.target.value = ''; });
+
+/* ───────── pornire ───────── */
+render();
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+initCloud();
+</script>
+</body>
+</html>
